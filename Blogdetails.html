@@ -4,19 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script defer src="blog.js"></script>
     <title>Document</title>
 </head>
-<body class="flex flex-col items-center">
+<body id="body" class="flex flex-col items-center duration-700">
+
     <div class="max-w-[1216px] w-full h-fit">
 
         <nav class="flex justify-between py-[32px] items-center">
 
+            <a href="index.html">
+
             <img src="homepagephoto/Logo.svg" alt="">
+
+            </a>
     
             <div class="flex gap-[40px] justify-between">
     
-            <a href="#">Home</a>
-            <a href="#">Write a Blog</a>
+            <a href="index.html">Home</a>
+            <a href="WritenewBlog.html">Write a Blog</a>
             <a href="#">My Blogs</a>
             <a href="#">Contact</a>
     
@@ -26,24 +32,22 @@
     
         <div class="w-[166px] h-12 relative bg-zinc-200 rounded-sm">
     
-            <input class="w-full pl-3 h-full apperance-none placeholder:text-xs text-xs" type="text" placeholder="Search">
+            <input class="w-full pl-3 h-full bg-zinc-400 apperance-none placeholder:text-xs text-xs" type="text" placeholder="Search">
             <img class="absolute size-6 right-3 top-2" src="homepagephoto/search-outline.svg" alt="">
     
         </div>
     
-        <div class="bg-black w-[48px] h-[24px] flex items-center rounded-full">
-    
-            <div class="w-[24px] h-[24px] rounded-full bg-white flex items-center">
-    
-                 <img src="homepagephoto/sunny.svg" alt="">
-    
-    
-            </div>
-    
+        <div class="flex items-center gap-4">
+
+            <button id="darkModeBtn" class="w-25 h-10 bg-blue-500 text-white font-bold rounded-[6px] cursor-pointer">Dark mode</button>
+      
+            <a href="signin.html">
+      
+          <button class="bg-black text-white font-bold w-[68px] h-10 rounded-sm p-[8px] cursor-pointer">Sign in</button>
+      
+            </a>
+      
           </div>
-    
-        <button class="bg-black text-white font-bold w-[68px] h-[36px] rounded-sm p-[8px] cursor-pointer">Sign in</button>
-    
             </div>
         </nav>
 
@@ -231,9 +235,9 @@
     
             <div class="flex flex-col text-[#3B3C4A] gap-2">
     
-            <a href="#">Home</a>
+            <a href="index.html">Home</a>
     
-            <a href="#">Write a Blog</a>
+            <a href="WritenewBlog.html">Write a Blog</a>
     
             <a href="#">My Blogs</a>
     
