@@ -1,4 +1,10 @@
 const darkModeBtn = document.getElementById("darkModeBtn")
+const blogCarts = document.getElementById("blogCarts")
+const loadMoreBtn = document.getElementById("loadMoreBtn")
+
+async function name(params) {
+  
+}
 
 darkModeBtn.addEventListener("click", () => {
 
@@ -19,18 +25,6 @@ darkModeBtn.addEventListener("click", () => {
   }
 
 })
-
-
-
-
-
-
-
-
-
-
-
-
 
 window.addEventListener("DOMContentLoaded", () => {
     const savedMode = localStorage.getItem("darkmode") || "light"

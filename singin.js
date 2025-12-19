@@ -4,6 +4,32 @@ const passwordInput = document.getElementById('passwordInput')
 
 let userData = {}
 
+const signInRequest = async () => {
+  try {
+    const res = await fetch("https://ilkinibadov.com/api/b/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(userData)
+    })
+
+    if (!res.ok) {
+      throw new Error("Email or password incorrect")
+    }
+
+    const data = await res.json()
+    console.log("Login passed:", data)
+
+    window.location.href = "http://127.0.0.1:5500/index.html"
+
+  } catch (error) {
+    alert("Email or password is incorrect!")
+    console.error(error.message)
+  }
+}
+
+
 emailInput.addEventListener('input', (e) => {
   userData = {
     ...userData,
@@ -19,5 +45,5 @@ passwordInput.addEventListener('input', (e) => {
 })
 
 signInInput.addEventListener("click", () => {
-    console.log(userData);
+  signInRequest()
 })
