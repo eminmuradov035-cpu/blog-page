@@ -39,7 +39,7 @@ const getAccessToken = async () => {
     })
 
     if (!res.ok) {
-      throw new Error("Token almaqda problem oldu")
+      throw new Error("There was a problem getting the token.")
     }
 
     const data = await res.json()

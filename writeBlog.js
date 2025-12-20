@@ -1,74 +1,73 @@
-const darkModeBtn = document.getElementById("darkModeBtn")
-const addTitleForBlog = document.getElementById('addTitleForBlog')
-const selectCategory = document.getElementById('selectCategory')
-const addThumbnailimgage = document.getElementById('addThumbnailimgage')
-const addBlogBody = document.getElementById('addBlogBody')
-const submitBtn = document.getElementById('submitBtn')
+const darkModeBtn = document.getElementById("darkModeBtn");
+const addTitleForBlog = document.getElementById("addTitleForBlog");
+const selectCategory = document.getElementById("selectCategory");
+const addThumbnailimgage = document.getElementById("addThumbnailimgage");
+const addBlogBody = document.getElementById("addBlogBody");
+const submitBtn = document.getElementById("submitBtn");
 
-let userData = []
+let blogData = {
+  title: "",
+  category: "",
+  content: "",
+  thumbnail: null
+};
 
-darkModeBtn.addEventListener("click", () => {
+const token =
+  localStorage.getItem("accessToken") ||
+  sessionStorage.getItem("accessToken");
 
-  const darkmode = localStorage.getItem("darkmode")
-  localStorage.setItem("darkmode", darkmode === "light" ? "dark" : "light")
-
-  const currentMode = localStorage.getItem("darkmode")
-  console.log(currentMode);
-
-  const body = document.getElementById("body")
-
-  if (currentMode === "light") {
-    body.classList.remove("bg-slate-900", "text-white")
-    body.classList.add("bg-white", "text-black")
-  } else {
-    body.classList.remove("bg-white", "text-black")
-    body.classList.add("bg-slate-900", "text-white")
+const submitRequest = async () => {
+  if (!token) {
+    alert("Please log in again");
+    return;
   }
 
-})
+  const formData = new FormData();
+  formData.append("title", blogData.title);
+  formData.append("category", blogData.category);
+  formData.append("content", blogData.content);
+  formData.append("thumbnail", blogData.thumbnail);
 
-addTitleForBlog.addEventListener('input', (e) => {
-  userData = {
-    ...userData,
-    titleBlog: e.target.value
-  }
-})
+  try {
+    const res = await fetch("https://ilkinibadov.com/api/blogs", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      body: formData
+    });
 
-selectCategory.addEventListener('input', (e) => {
-  userData = {
-    ...userData, 
-    Categoty: e.target.value
-  }
-})
-
-addThumbnailimgage.addEventListener('input', (e) => {
-  userData = {
-    ...userData,
-    thumbnail: e.target.value
-  }
-})
-
-addBlogBody.addEventListener('input', (e) => {
-  userData = {
-    ...userData,
-    body: e.target.value
-  }
-})
-
-submitBtn.addEventListener("click", () => {
-  console.log(userData);
-})
-
-window.addEventListener("DOMContentLoaded", () => {
-    const savedMode = localStorage.getItem("darkmode") || "light"
-  
-    const body = document.getElementById("body")
-  
-    if (savedMode === "light") {
-      body.classList.remove("bg-slate-900", "text-white")
-      body.classList.add("bg-white", "text-black")
-    } else {
-      body.classList.remove("bg-white", "text-black")
-      body.classList.add("bg-slate-900", "text-white")
+    if (!res.ok) {
+      throw new Error("Blog not created");
     }
-  })
+
+    const data = await res.json();
+    console.log("Blog created:", data);
+    alert("Blog shared successfully");
+
+  } catch (err) {
+    console.error(err.message);
+    alert(err.message);
+  }
+};
+
+addTitleForBlog.addEventListener("input", e => {
+  blogData.title = e.target.value;
+});
+
+selectCategory.addEventListener("input", e => {
+  blogData.category = e.target.value;
+});
+
+addBlogBody.addEventListener("input", e => {
+  blogData.content = e.target.value;
+});
+
+addThumbnailimgage.addEventListener("change", e => {
+  blogData.thumbnail = e.target.files[0];
+});
+
+submitBtn.addEventListener("click", e => {
+  e.preventDefault();
+  submitRequest();
+});
