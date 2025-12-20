@@ -22,11 +22,19 @@ const submitRequest = async () => {
     return;
   }
 
+  if (!blogData.title || !blogData.category || !blogData.content) {
+    alert("Please fill in all required fields");
+    return;
+  }
+
   const formData = new FormData();
   formData.append("title", blogData.title);
   formData.append("category", blogData.category);
   formData.append("content", blogData.content);
-  formData.append("thumbnail", blogData.thumbnail);
+
+  if (blogData.thumbnail) {
+    formData.append("thumbnail", blogData.thumbnail);
+  }
 
   try {
     const res = await fetch("https://ilkinibadov.com/api/blogs", {
@@ -38,36 +46,53 @@ const submitRequest = async () => {
     });
 
     if (!res.ok) {
-      throw new Error("Blog not created");
+      const errorData = await res.json().catch(() => ({}));
+      throw new Error(errorData.message || "Blog not created");
     }
 
     const data = await res.json();
     console.log("Blog created:", data);
     alert("Blog shared successfully");
 
+    blogData = { title: "", category: "", content: "", thumbnail: null };
+    addTitleForBlog.value = "";
+    selectCategory.value = "";
+    addBlogBody.value = "";
+    addThumbnailimgage.value = "";
+
   } catch (err) {
-    console.error(err.message);
+    console.error("Error:", err);
     alert(err.message);
   }
 };
 
-addTitleForBlog.addEventListener("input", e => {
-  blogData.title = e.target.value;
-});
+if (addTitleForBlog) {
+  addTitleForBlog.addEventListener("input", e => {
+    blogData.title = e.target.value;
+  });
+}
 
-selectCategory.addEventListener("input", e => {
-  blogData.category = e.target.value;
-});
+if (selectCategory) {
+  selectCategory.addEventListener("input", e => {
+    blogData.category = e.target.value;
+  });
+}
 
-addBlogBody.addEventListener("input", e => {
-  blogData.content = e.target.value;
-});
+if (addBlogBody) {
+  addBlogBody.addEventListener("input", e => {
+    blogData.content = e.target.value;
+  });
+}
 
-addThumbnailimgage.addEventListener("change", e => {
-  blogData.thumbnail = e.target.files[0];
-});
+if (addThumbnailimgage) {
+  addThumbnailimgage.addEventListener("change", e => {
+    blogData.thumbnail = e.target.files[0];
+  });
+}
 
-submitBtn.addEventListener("click", e => {
-  e.preventDefault();
-  submitRequest();
-});
+if (submitBtn) {
+  submitBtn.addEventListener("click", e => {
+    e.preventDefault();
+    submitRequest();
+  });
+}

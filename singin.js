@@ -21,7 +21,18 @@ const signInRequest = async () => {
     const data = await res.json()
     console.log("Login passed:", data)
 
-    window.location.href = "http://127.0.0.1:5500/index.html"
+    const token = data.token || data.accessToken || data.access_token || data.data?.token
+
+    if (token) {
+      localStorage.setItem("accessToken", token)
+      console.log("Token saved to localStorage:", token)
+      
+      alert("Login successful!")
+      window.location.href = "http://127.0.0.1:5500/index.html"
+    } else {
+      console.error("Token not found in response:", data)
+      alert("Login successful but token not received")
+    }
 
   } catch (error) {
     alert("Email or password is incorrect!")
