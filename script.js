@@ -83,7 +83,7 @@ loadMoreBtn.addEventListener("click", () => {
 
 async function getAllBlogs(append = false) {
   try {
-    let url = `https://ilkinibadov.com/api/b/blogs?page=${currentPage}&limit=${limit}`
+    let url = `https://ilkinibadov.com/api/b/blogs?page=${currentPage}&limit=${limit-100}`
 
     if (selectedCategory) {
       url += `&category=${encodeURIComponent(selectedCategory)}`
