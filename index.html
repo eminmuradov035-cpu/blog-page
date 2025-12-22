@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="script.js"></script>
-    <title>Document</title>
+    <title>Blog Homepage</title>
 </head>
-<body id="body" class="flex flex-col items-center duration-700">
+<body id="body" class="flex flex-col items-center duration-700 bg-white text-black">
 
-    <div class="max-w-[1216px] w-full h-fit">
+    <div class="w-full w-full h-fit">
 
-    <nav class="flex justify-between py-[32px] items-center">
+    <nav class="flex justify-between py-[32px] px-[20px] items-center">
 
-        <img src="homepagephoto/Logo.svg" alt="">
+        <img src="homepagephoto/Logo.svg" alt="Logo">
 
         <div class="flex gap-[40px] justify-between">
 
-        <a href="index.html">Home</a>
-        <a href="WritenewBlog.html">Write a Blog</a>
-        <a href="#">My Blogs</a>
-        <a href="#">Contact</a>
+        <a href="index.html" class="hover:text-blue-500 transition-colors">Home</a>
+        <a href="WritenewBlog.html" class="hover:text-blue-500 transition-colors">Write a Blog</a>
+        <a href="#" class="hover:text-blue-500 transition-colors">My Blogs</a>
+        <a href="#" class="hover:text-blue-500 transition-colors">Contact</a>
 
         </div>
 
@@ -28,8 +28,8 @@
 
     <div class="w-[166px] h-12 relative bg-zinc-200 rounded-sm">
 
-        <input id="serachTerm" class="w-full pl-3 h-full bg-zinc-400 apperance-none placeholder:text-xs text-xs" type="text" placeholder="Search">
-        <img class="absolute size-6 right-3 top-2" src="homepagephoto/search-outline.svg" alt="">
+        <input id="searchInput" class="w-full pl-3 h-full bg-zinc-200 appearance-none placeholder:text-xs text-xs rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" placeholder="Search blogs...">
+        <img class="absolute size-6 right-3 top-3 pointer-events-none" src="homepagephoto/search-outline.svg" alt="Search">
 
     </div>
     
@@ -37,11 +37,11 @@
 
       <div class="flex items-center gap-4">
 
-      <button id="darkModeBtn" class="w-25 h-10 bg-blue-500 text-white font-bold rounded-[6px] cursor-pointer">Dark mode</button>
+      <button id="darkModeBtn" class="w-[120px] h-10 bg-blue-500 text-white font-bold rounded-[6px] cursor-pointer hover:bg-blue-600 transition-colors">Dark mode</button>
 
       <a href="signin.html">
 
-    <button class="bg-black text-white font-bold w-[68px] h-10 rounded-sm p-[8px] cursor-pointer">Sign in</button>
+    <button class="bg-black text-white font-bold w-[68px] h-10 rounded-sm p-[8px] cursor-pointer hover:bg-gray-800 transition-colors">Sign in</button>
 
       </a>
 
@@ -52,15 +52,15 @@
 
     <section>
 
-        <div class="relative">
+        <div class="relative mb-[60px]">
 
-            <img class="w-full h-[450px]" src="homepagephoto/m-post-card-overlay.png" alt="">
+            <img class="w-full h-[450px] object-cover rounded-xl" src="homepagephoto/m-post-card-overlay.png" alt="Featured post">
             
             <div class="flex flex-col gap-[18px] absolute bottom-10 left-10">
 
-                <p class="text-md bg-blue-500 text-white w-[97px] h-[28px] rounded-[6px] text-center">technology</p>
+                <p class="text-md bg-blue-500 text-white w-[97px] h-[28px] rounded-[6px] text-center flex items-center justify-center">Technology</p>
 
-                <p class="text-[36px] text-white">The Impact of Technology on the <br> Workplace: How Technology is Changing</p>
+                <p class="text-[36px] text-white font-bold">The Impact of Technology on the <br> Workplace: How Technology is Changing</p>
 
                 <div class="flex gap-[20px] text-white">
 
@@ -74,213 +74,42 @@
 
         </div>
 
-        <div id="blogCarts" class="pt-[60px] grid grid-cols-3 gap-4">
+        <div id="blogCarts" class="grid grid-cols-3 gap-5">
 
-            <div class="border-[1px] border-[#E8E8EA] p-[16px] w-fit flex flex-col gap-[20px] rounded-[10px] w-[392px] h-[476px]">
-
-                <img class="w-[360px] h-[240px]" src="homepagephoto/sea.png" alt="">
-
-                <p class="text-[16px] text-[#4B6BFB] bg-zinc-200 w-[97px] h-[28px] text-center">technology</p>
-
-                <p class="text-[24px]">The Impact of Technology on <br> the Workplace: How <br> Technology is Changing</p>
-
-                <div class="flex gap-[20px] text-[#97989F]">
-
-                <p class="text-[16px]">Tracey Wilson</p>
-
-                <p class="text-[16px]">August 20, 2022</p>
-
-                </div>
-
-            </div>
-
-            <a href="Blogdetails.html">
-
-            <div class="border-[1px] border-[#E8E8EA] p-[16px] w-fit flex flex-col gap-[20px] rounded-[10px] w-[392px] h-[476px]">
-
-                <img class="w-[360px] h-[240px]" src="homepagephoto/building.png" alt="">
-
-                <p class="text-[16px] text-[#4B6BFB] bg-zinc-200 w-[97px] h-[28px] text-center">technology</p>
-
-                <p class="text-[24px]">The Impact of Technology on <br> the Workplace: How <br> Technology is Changing</p>
-
-                <div class="flex gap-[20px] text-[#97989F]">
-
-                <p class="text-[16px]">Tracey Wilson</p>
-
-                <p class="text-[16px]">August 20, 2022</p>
-
-                </div>
-
-            </div>
-
-        </a>
-
-            <div class="border-[1px] border-[#E8E8EA] p-[16px] w-fit flex flex-col gap-[20px] rounded-[10px] w-[392px] h-[476px]">
-
-                <img class="w-[360px] h-[240px]" src="homepagephoto/car-girl.png" alt="">
-
-                <p class="text-[16px] text-[#4B6BFB] bg-zinc-200 w-[97px] h-[28px] text-center">technology</p>
-
-                <p class="text-[24px]">The Impact of Technology on <br> the Workplace: How <br> Technology is Changing</p>
-
-                <div class="flex gap-[20px] text-[#97989F]">
-
-                <p class="text-[16px]">Tracey Wilson</p>
-
-                <p class="text-[16px]">August 20, 2022</p>
-
-                </div>
-
-            </div>
-
-            <div class="border-[1px] border-[#E8E8EA] p-[16px] w-fit flex flex-col gap-[20px] rounded-[10px] w-[392px] h-[476px]">
-
-                <img class="w-[360px] h-[240px]" src="homepagephoto/house.png" alt="">
-
-                <p class="text-[16px] text-[#4B6BFB] bg-zinc-200 w-[97px] h-[28px] text-center">technology</p>
-
-                <p class="text-[24px]">The Impact of Technology on <br> the Workplace: How <br> Technology is Changing</p>
-
-                <div class="flex gap-[20px] text-[#97989F]">
-
-                <p class="text-[16px]">Tracey Wilson</p>
-
-                <p class="text-[16px]">August 20, 2022</p>
-
-                </div>
-
-            </div>
-
-            <div class="border-[1px] border-[#E8E8EA] p-[16px] w-fit flex flex-col gap-[20px] rounded-[10px] w-[392px] h-[476px]">
-
-                <img class="w-[360px] h-[240px]" src="homepagephoto/rock.png" alt="">
-
-                <p class="text-[16px] text-[#4B6BFB] bg-zinc-200 w-[97px] h-[28px] text-center">technology</p>
-
-                <p class="text-[24px]">The Impact of Technology on <br> the Workplace: How <br> Technology is Changing</p>
-
-                <div class="flex gap-[20px] text-[#97989F]">
-
-                <p class="text-[16px]">Tracey Wilson</p>
-
-                <p class="text-[16px]">August 20, 2022</p>
-
-                </div>
-
-            </div>
-
-            <div class="border-[1px] border-[#E8E8EA] p-[16px] w-fit flex flex-col gap-[20px] rounded-[10px] w-[392px] h-[476px]">
-
-                <img class="w-[360px] h-[240px]" src="homepagephoto/car.png" alt="">
-
-                <p class="text-[16px] text-[#4B6BFB] bg-zinc-200 w-[97px] h-[28px] text-center">technology</p>
-
-                <p class="text-[24px]">The Impact of Technology on <br> the Workplace: How <br> Technology is Changing</p>
-
-                <div class="flex gap-[20px] text-[#97989F]">
-
-                <p class="text-[16px]">Tracey Wilson</p>
-
-                <p class="text-[16px]">August 20, 2022</p>
-
-                </div>
-
-            </div>
-
-            <div class="border-[1px] border-[#E8E8EA] p-[16px] w-fit flex flex-col gap-[20px] rounded-[10px] w-[392px] h-[476px]">
-
-                <img class="w-[360px] h-[240px]" src="homepagephoto/phone.png" alt="">
-
-                <p class="text-[16px] text-[#4B6BFB] bg-zinc-200 w-[97px] h-[28px] text-center">technology</p>
-
-                <p class="text-[24px]">The Impact of Technology on <br> the Workplace: How <br> Technology is Changing</p>
-
-                <div class="flex gap-[20px] text-[#97989F]">
-
-                <p class="text-[16px]">Tracey Wilson</p>
-
-                <p class="text-[16px]">August 20, 2022</p>
-
-                </div>
-
-            </div>
-
-            <div class="border-[1px] border-[#E8E8EA] p-[16px] w-fit flex flex-col gap-[20px] rounded-[10px] w-[392px] h-[476px]">
-
-                <img class="w-[360px] h-[240px]" src="homepagephoto/boat.png" alt="">
-
-                <p class="text-[16px] text-[#4B6BFB] bg-zinc-200 w-[97px] h-[28px] text-center">technology</p>
-
-                <p class="text-[24px]">The Impact of Technology on <br> the Workplace: How <br> Technology is Changing</p>
-
-                <div class="flex gap-[20px] text-[#97989F]">
-
-                <p class="text-[16px]">Tracey Wilson</p>
-
-                <p class="text-[16px]">August 20, 2022</p>
-
-                </div>
-
-            </div>
-
-            <div class="border-[1px] border-[#E8E8EA] p-[16px] w-fit flex flex-col gap-[20px] rounded-[10px] w-[392px] h-[476px]">
-
-                <img class="w-[360px] h-[240px]" src="homepagephoto/controller.png" alt="">
-
-                <p class="text-[16px] text-[#4B6BFB] bg-zinc-200 w-[97px] h-[28px] text-center">technology</p>
-
-                <p class="text-[24px]">The Impact of Technology on <br> the Workplace: How <br> Technology is Changing</p>
-
-                <div class="flex gap-[20px] text-[#97989F]">
-
-                <p class="text-[16px]">Tracey Wilson</p>
-
-                <p class="text-[16px]">August 20, 2022</p>
-
-                </div>
-
-            </div>
-
+            
         </div>
 
-        <div class="w-full flex justify-center mb-[92px]">
+        <div class="w-full flex justify-center my-[60px]">
 
-            <a href="Authorpage.html">
+        <button id="loadMoreBtn" class="text-[#696A75] border-[2px] border-zinc-400 pt-[12px] pr-[20px] pb-[12px] pl-[20px] rounded-md hover:bg-zinc-100 transition-colors cursor-pointer font-semibold">Load More</button>
 
-        <button id="loadMoreBtn" class="text-[#696A75] border-[2px] border-zinc-400 mt-[32px] pt-[12px] pr-[20px] pb-[12px] pl-[20px] flex justify-center cursor-pointer">Load More</button>
-
-            </a>
-
-    </div>
+        </div>
     </section>
-
-
 
 </div>  
 
-<footer class=" bg-zinc-200 w-full flex flex-col items-center py-[60px]">
+<footer class="bg-zinc-200 w-full flex flex-col items-center py-[60px] mt-20">
 
-<div class="max-w-[1216px] w-full h-fit flex justify-between border-b-[1px] pb-14">
+<div class="max-w-[1216px] w-full h-fit flex justify-between border-b-[1px] border-zinc-400 pb-14">
 
-    <div class="flex flex-col gap-3 w-full">
+    <div class="flex flex-col gap-3 w-full max-w-[320px]">
 
         <h3 class="text-[18px] font-bold">About</h3>
 
-        <p class="text-[#696A75]">Lorem ipsum dolor sit amet,<br>
-             consectetur adipiscing elit, sed do <br>
-              eiusmod tempor incididunt ut labore <br>
-               et dolore magna aliqua. Ut enim ad <br>
+        <p class="text-[#696A75] leading-relaxed">Lorem ipsum dolor sit amet,
+             consectetur adipiscing elit, sed do 
+              eiusmod tempor incididunt ut labore 
+               et dolore magna aliqua. Ut enim ad 
                 minim veniam</p>
 
-                <div>
+                <div class="mt-2">
 
                 <div class="flex gap-1">
-                    <h3>Email:</h3><a href="mailto">info@jstemplate.net</a>
+                    <h3 class="font-semibold">Email:</h3><a href="mailto:info@jstemplate.net" class="text-blue-600 hover:underline">info@jstemplate.net</a>
                 </div>
 
                 <div class="flex gap-1">
-                    <h3>Phone:</h3><a href="tel">880 123 456 789</a>
+                    <h3 class="font-semibold">Phone:</h3><a href="tel:880123456789" class="text-blue-600 hover:underline">880 123 456 789</a>
                 </div>
 
             </div>
@@ -294,13 +123,13 @@
 
         <div class="flex flex-col text-[#3B3C4A] gap-2">
 
-        <a href="index.html">Home</a>
+        <a href="index.html" class="hover:text-blue-600 transition-colors">Home</a>
 
-        <a href="WritenewBlog.html">Write a Blog</a>
+        <a href="WritenewBlog.html" class="hover:text-blue-600 transition-colors">Write a Blog</a>
 
-        <a href="#">My Blogs</a>
+        <a href="#" class="hover:text-blue-600 transition-colors">My Blogs</a>
 
-        <a href="#">Contact</a>
+        <a href="#" class="hover:text-blue-600 transition-colors">Contact</a>
 
     </div>
 
@@ -312,34 +141,36 @@
 
         <div class="flex flex-col text-[#3B3C4A] gap-2">
 
-            <a href="#">Lifestile</a>
+            <a href="#" class="hover:text-blue-600 transition-colors category-filter" data-category="lifestyle">Lifestyle</a>
             
-            <a href="#">Technology</a>
+            <a href="#" class="hover:text-blue-600 transition-colors category-filter" data-category="technology">Technology</a>
             
-            <a href="#">Travel</a>
+            <a href="#" class="hover:text-blue-600 transition-colors category-filter" data-category="travel">Travel</a>
             
-            <a href="#">Buisness</a>
+            <a href="#" class="hover:text-blue-600 transition-colors category-filter" data-category="business">Business</a>
             
-            <a href="#">Economy</a>
+            <a href="#" class="hover:text-blue-600 transition-colors category-filter" data-category="economy">Economy</a>
             
-            <a href="#">Sports</a>
+            <a href="#" class="hover:text-blue-600 transition-colors category-filter" data-category="sports">Sports</a>
         </div>
     </div>
 
 </div>
 </div>
 
-<div class="flex items-center p-8 gap-140">
+<div class="flex items-center justify-between max-w-[1216px] w-full pt-8 px-4">
 
-    <img src="homepagephoto/Copyright Info.svg" alt="">
+    <div class="flex items-center gap-2">
+        <p class="text-sm text-gray-600">© 2024 Blog. All rights reserved.</p>
+    </div>
 
-    <div class="flex gap-3">
+    <div class="flex gap-6 text-sm">
 
-    <a href="#">Terms of Use</a>
+    <a href="#" class="hover:text-blue-600 transition-colors">Terms of Use</a>
 
-    <a href="#">Privacy Policy</a>
+    <a href="#" class="hover:text-blue-600 transition-colors">Privacy Policy</a>
 
-    <a href="#">Cookie Policy</a>
+    <a href="#" class="hover:text-blue-600 transition-colors">Cookie Policy</a>
 
     </div>
 
