@@ -83,7 +83,7 @@ loadMoreBtn.addEventListener("click", () => {
 
 async function getAllBlogs(append = false) {
   try {
-    let url = `https://ilkinibadov.com/api/b/blogs?page=${currentPage}&limit=${limit-100}`
+    let url = `https://ilkinibadov.com/api/b/blogs?page=${currentPage}&limit=${limit}`
 
     if (selectedCategory) {
       url += `&category=${encodeURIComponent(selectedCategory)}`
@@ -129,9 +129,7 @@ async function getAllBlogs(append = false) {
       }
 
       renderBlogs(blogs)
-
-      const totalLoaded = currentPage * limit
-      if (totalLoaded >= totalBlogs) {
+      if (blogs.length < limit) {
         loadMoreBtn.classList.add('hidden')
       } else {
         loadMoreBtn.classList.remove('hidden')
@@ -196,6 +194,7 @@ const renderBlogs = (blogs) => {
     blogCarts.append(a)
   })
 }
+
 window.addEventListener("DOMContentLoaded", () => {
   const savedMode = localStorage.getItem("darkmode") || "light"
   const body = document.getElementById("body")

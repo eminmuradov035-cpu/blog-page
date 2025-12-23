@@ -20,17 +20,22 @@ darkModeBtn.addEventListener("click", () => {
 
 })
 
-
-
-
-
-
-
-
-
-
-
-
+async function getBlogById(blogId) {
+  try {
+    const res = await fetch(`https://ilkinibadov.com/api/b/blogs/blog/${blogId}`)
+    
+    if (res.ok) {
+      const blog = await res.json()
+      return blog
+    } else {
+      console.error('Blog not found')
+      return null
+    }
+  } catch (error) {
+    console.error('Error fetching blog:', error)
+    return null
+  }
+}
 
 window.addEventListener("DOMContentLoaded", () => {
     const savedMode = localStorage.getItem("darkmode") || "light"
