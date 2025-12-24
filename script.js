@@ -8,7 +8,7 @@ const blogsTitle = document.getElementById("blogsTitle")
 let selectedCategory = ''
 let searchTerm = ''
 let currentPage = 1
-let limit = 8
+let limit = 9
 let totalBlogs = 0
 
 searchInput.addEventListener("input", (e) => {

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script defer src="blog.js"></script>
+    <title>Blog Details</title>
+</head>
+<body id="body" class="flex flex-col items-center duration-700">
+
+    <div class="max-w-[3216px] w-full h-fit">
+
+        <nav class="flex justify-between py-[32px] px-4 items-center">
+
+            <a href="index.html">
+                <img src="homepagephoto/Logo.svg" alt="">
+            </a>
+    
+            <div class="flex gap-[40px] justify-between">
+                <a href="index.html">Home</a>
+                <a href="WritenewBlog.html">Write a Blog</a>
+                <a href="#">My Blogs</a>
+                <a href="#">Contact</a>
+            </div>
+    
+            <div class="flex gap-[36px] justify-between items-center">
+    
+                <div class="w-[166px] h-12 relative bg-zinc-200 rounded-sm">
+                    <input class="w-full pl-3 h-full bg-zinc-400 apperance-none placeholder:text-xs text-xs" type="text" placeholder="Search">
+                    <img class="absolute size-6 right-3 top-2" src="homepagephoto/search-outline.svg" alt="">
+                </div>
+    
+                <div class="flex items-center gap-4">
+                    <button id="darkModeBtn" class="w-25 h-10 bg-blue-500 text-white font-bold rounded-[6px] cursor-pointer">Dark mode</button>
+                    <a href="signin.html">
+                        <button class="bg-black text-white font-bold w-[68px] h-10 rounded-sm p-[8px] cursor-pointer">Sign in</button>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <section class="flex flex-col items-center pt-[80px] mb-[121px]">
+
+            <div class="flex flex-col gap-5">
+
+                <p id="blogCategory" class="text-md bg-blue-500 text-white w-fit px-4 py-2 rounded-[6px] text-center">
+                    Loading...
+                </p>
+
+                <h3 id="blogTitle" class="font-semibold text-[36px] leading-tight">
+                    Loading blog title...
+                </h3>
+
+                <div class="flex gap-[20px] text-[#696A75]">
+                    <p id="blogAuthor">Loading author...</p>
+                    <p id="blogDate">Loading date...</p>
+                </div>
+
+                <img id="blogImage" class="w-[800px] h-[462px] object-cover rounded-lg" src="homepagephoto/tower.png" alt="Blog Image">
+
+            </div>
+
+            <div id="blogContent" class="text-[#3B3C4A] text-[20px] py-[30px] px-90"> 
+
+                <p class="mb-[30px]">Loading blog content...</p>
+
+            </div>
+
+        </section>
+
+        <footer class="bg-zinc-200 w-full  flex flex-col items-center py-[60px]"> 
+
+            <div class="max-w-[1216px] w-full h-fit flex justify-between border-b-[1px] pb-14">
+
+                <div class="flex flex-col gap-3 w-full">
+            
+                    <h3 class="text-[18px] font-bold">About</h3>
+            
+                    <p class="text-[#696A75]">Lorem ipsum dolor sit amet,<br>
+                         consectetur adipiscing elit, sed do <br>
+                          eiusmod tempor incididunt ut labore <br>
+                           et dolore magna aliqua. Ut enim ad <br>
+                            minim veniam</p>
+            
+                            <div>
+            
+                            <div class="flex gap-1">
+                                <h3>Email:</h3><a href="mailto">info@jstemplate.net</a>
+                            </div>
+            
+                            <div class="flex gap-1">
+                                <h3>Phone:</h3><a href="tel">880 123 456 789</a>
+                            </div>
+            
+                        </div>
+                </div>
+            
+                <div class="flex gap-20">
+            
+                    <div class="flex flex-col gap-3">
+            
+                        <h3 class="text-[18px] font-bold">Quick Link</h3>
+            
+                        <div class="flex flex-col text-[#3B3C4A] gap-2">
+            
+                            <a href="index.html">Home</a>
+                            <a href="WritenewBlog.html">Write a Blog</a>
+                            <a href="#">My Blogs</a>
+                            <a href="#">Contact</a>
+            
+                        </div>
+            
+                    </div>
+            
+                    <div class="flex flex-col gap-3">
+            
+                        <h3 class="text-[18px] font-bold">Category</h3>
+            
+                        <div class="flex flex-col text-[#3B3C4A] gap-2">
+            
+                            <a href="#">Lifestyle</a>
+                            <a href="#">Technology</a>
+                            <a href="#">Travel</a>
+                            <a href="#">Business</a>
+                            <a href="#">Economy</a>
+                            <a href="#">Sports</a>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+            
+            <div class="flex items-center p-8 gap-140">
+            
+                <img src="homepagephoto/Copyright Info.svg" alt="">
+            
+                <div class="flex gap-3">
+            
+                    <a href="#">Terms of Use</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Cookie Policy</a>
+            
+                </div>
+            
+            </div>
+
+        </footer>
+
+    </div>
+</body>
+</html>
