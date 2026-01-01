@@ -10,6 +10,7 @@ function getBlogIdFromURL() {
   const urlParams = new URLSearchParams(window.location.search)
   return urlParams.get('id')
 }
+
 async function getBlogDetails() {
   const blogId = getBlogIdFromURL()
   
@@ -57,8 +58,26 @@ function displayBlogDetails(blog) {
   if (blogTitle) {
     blogTitle.textContent = blog.title || "Untitled Blog"
   }
+
   if (blogAuthor) {
-    blogAuthor.textContent = blog.author || blog.user?.firstname + " " + blog.user?.lastname || "Anonymous"
+    const authorName = blog.author || 
+                       (blog.user?.firstname && blog.user?.lastname ? 
+                        `${blog.user.firstname} ${blog.user.lastname}` : null) ||
+                       "Anonymous"
+    
+    const authorEmail = blog.user?.email || blog.authorEmail || null
+    
+    if (authorEmail) {
+      blogAuthor.innerHTML = `
+        <span>${authorName}</span> 
+        <span class="text-gray-500 mx-2">•</span>
+        <a href="mailto:${authorEmail}" class="text-blue-500 hover:text-blue-700 hover:underline transition-colors">
+          ${authorEmail}
+        </a>
+      `
+    } else {
+      blogAuthor.textContent = authorName
+    }
   }
 
   if (blogDate) {
@@ -85,7 +104,6 @@ function displayBlogDetails(blog) {
         `<p class="mb-[30px] leading-relaxed">${para.replace(/\n/g, '<br>')}</p>`
       ).join('')
     } else {
-
       blogContent.innerHTML = `<p class="mb-[30px] leading-relaxed">${content}</p>`
     }
   }

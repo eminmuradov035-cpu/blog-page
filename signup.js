@@ -44,7 +44,9 @@ const getAccessToken = async () => {
 
     const data = await res.json()
     console.log("Access token:", data.accessToken)
+
     localStorage.setItem("accessToken", data.accessToken)
+    sessionStorage.setItem("accessToken", data.accessToken)
 
   } catch (error) {
     console.error(error.message)
@@ -68,9 +70,28 @@ const signUpRequest = async () => {
     const data = await res.json()
     console.log("Register success:", data)
 
-    await getAccessToken()
+    const token = data.token || data.accessToken || data.access_token || data.data?.token
+    const refreshToken = data.refreshToken || data.refresh_token || data.data?.refreshToken
 
-    window.location.href = "http://127.0.0.1:5500/index.html"
+    if (token) {
+
+      localStorage.setItem("accessToken", token)
+      sessionStorage.setItem("accessToken", token)
+      console.log("Access token saved:", token)
+
+      if (refreshToken) {
+        localStorage.setItem("refreshToken", refreshToken)
+        sessionStorage.setItem("refreshToken", refreshToken)
+        console.log("Refresh token saved:", refreshToken)
+      }
+
+      alert("Registration successful!")
+      window.location.href = "http://127.0.0.1:5500/index.html"
+    } else {
+
+      await getAccessToken()
+      window.location.href = "http://127.0.0.1:5500/index.html"
+    }
 
   } catch (error) {
     alert(error.message)

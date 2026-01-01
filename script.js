@@ -4,6 +4,7 @@ const loadMoreBtn = document.getElementById("loadMoreBtn")
 const searchInput = document.getElementById("searchInput")
 const categoriesContainer = document.getElementById("categoriesContainer")
 const blogsTitle = document.getElementById("blogsTitle")
+const heroBlog = document.getElementById("heroBlog")
 
 let selectedCategory = ''
 let searchTerm = ''
@@ -13,9 +14,16 @@ let totalBlogs = 0
 
 searchInput.addEventListener("input", (e) => {
   selectedCategory = ''
-  searchTerm = e.target.value
+  removeSelect()
+  searchTerm = e.target.value.trim()
   currentPage = 1
-  blogsTitle.innerText = searchTerm || 'All Blogs'
+  
+  if (searchTerm) {
+    blogsTitle.innerText = searchTerm
+  } else {
+    blogsTitle.innerText = 'All Blogs'
+  }
+
   getAllBlogs()
 })
 
@@ -36,10 +44,10 @@ async function getCategories() {
           removeSelect()
           selectedCategory = category
           searchTerm = ''
+          searchInput.value = ''
           currentPage = 1
           blogsTitle.innerText = category.toUpperCase()
           button.classList.add("!border-red-500")
-          searchInput.value = ''
           getAllBlogs()
         })
         
@@ -89,20 +97,27 @@ async function getAllBlogs(append = false) {
       url += `&category=${encodeURIComponent(selectedCategory)}`
     }
 
-    if (searchTerm.length >= 3) {
+    if (searchTerm) {
       url += `&search=${encodeURIComponent(searchTerm)}`
     }
 
+    console.log("🔍 Search URL:", url)
+    console.log("📝 Search term:", searchTerm)
+
     if (!append) {
-      blogCarts.innerHTML = '<p class="text-center">Loading...</p>'
+      blogCarts.innerHTML = '<p class="text-center col-span-full">Searching...</p>'
     }
 
     const res = await fetch(url)
 
+    console.log("📡 Response status:", res.status)
+
     if (res.status === 404) {
       blogCarts.innerHTML = ''
+      if (heroBlog) heroBlog.style.display = 'none'
+      
       const h2 = document.createElement('h2')
-      h2.innerText = "No blogs found"
+      h2.innerText = searchTerm ? `No blogs found for "${searchTerm}"` : "No blogs found"
       h2.classList.add('text-center', 'text-2xl', 'font-bold', 'col-span-full')
       blogCarts.append(h2)
       loadMoreBtn.classList.add('hidden')
@@ -112,6 +127,8 @@ async function getAllBlogs(append = false) {
     if (res.ok) {
       const data = await res.json()
       
+      console.log("Blogs received:", data)
+      
       if (!append) {
         blogCarts.innerHTML = ''
       }
@@ -119,16 +136,26 @@ async function getAllBlogs(append = false) {
       totalBlogs = data.totalBlogs || data.total || 0
       const blogs = data.blogs || data.data || []
 
+      console.log("Total blogs:", blogs.length)
+
       if (blogs.length === 0 && !append) {
+        if (heroBlog) heroBlog.style.display = 'none'
+        
         const h2 = document.createElement('h2')
-        h2.innerText = "No blogs found"
+        h2.innerText = searchTerm ? `No blogs found for "${searchTerm}"` : "No blogs found"
         h2.classList.add('text-center', 'text-2xl', 'font-bold', 'col-span-full')
         blogCarts.append(h2)
         loadMoreBtn.classList.add('hidden')
         return
       }
 
-      renderBlogs(blogs)
+      if (!append && blogs.length > 0) {
+        renderHeroBlog(blogs[0])
+        renderBlogs(blogs)
+      } else {
+        renderBlogs(blogs)
+      }
+
       if (blogs.length < limit) {
         loadMoreBtn.classList.add('hidden')
       } else {
@@ -137,8 +164,64 @@ async function getAllBlogs(append = false) {
     }
   } catch (error) {
     console.error('Error fetching blogs:', error)
-    blogCarts.innerHTML = '<p class="text-center text-red-500">Error loading blogs. Please try again.</p>'
+    blogCarts.innerHTML = '<p class="text-center text-red-500 col-span-full">Error loading blogs. Please try again.</p>'
   }
+}
+
+function renderHeroBlog(blog) {
+  if (!heroBlog) {
+    console.warn("heroBlog element not found in HTML")
+    return
+  }
+
+  heroBlog.style.display = 'block'
+  heroBlog.innerHTML = ''
+
+  const heroCard = document.createElement('a')
+  heroCard.href = `blog-detail.html?id=${blog._id || blog.id}`
+  heroCard.className = 'block mb-12 rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow cursor-pointer bg-white dark:bg-slate-800'
+
+  const img = document.createElement('img')
+  img.src = blog.image || 'https://via.placeholder.com/1200x500'
+  img.alt = blog.title
+  img.className = 'w-full h-[500px] object-cover'
+
+  const contentDiv = document.createElement('div')
+  contentDiv.className = 'p-8'
+
+  const categorySpan = document.createElement('span')
+  categorySpan.textContent = blog.category || 'Uncategorized'
+  categorySpan.className = 'inline-block bg-blue-500 text-white text-sm px-4 py-2 rounded-full mb-4'
+
+  const title = document.createElement('h2')
+  title.textContent = blog.title
+  title.className = 'text-4xl font-bold mb-4'
+
+  const description = document.createElement('p')
+  const excerpt = blog.description || blog.content || ''
+  description.textContent = excerpt.substring(0, 200) + (excerpt.length > 200 ? '...' : '')
+  description.className = 'text-lg text-gray-600 dark:text-gray-400 mb-4'
+
+  const dateSpan = document.createElement('span')
+  if (blog.createdAt) {
+    const date = new Date(blog.createdAt)
+    dateSpan.textContent = date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })
+  }
+  dateSpan.className = 'text-sm text-gray-500'
+
+  contentDiv.appendChild(categorySpan)
+  contentDiv.appendChild(title)
+  contentDiv.appendChild(description)
+  contentDiv.appendChild(dateSpan)
+
+  heroCard.appendChild(img)
+  heroCard.appendChild(contentDiv)
+
+  heroBlog.appendChild(heroCard)
 }
 
 const renderBlogs = (blogs) => {
@@ -167,16 +250,16 @@ const renderBlogs = (blogs) => {
 
     if (blog.createdAt || blog.date) {
       const date = new Date(blog.createdAt || blog.date)
-      dateSpan.innerText = date.toLocaleDateString('en-US', { 
-        year: 'numeric', 
-        month: 'short', 
-        day: 'numeric' 
+      dateSpan.innerText = date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
       })
       dateSpan.classList.add('text-xs', 'text-gray-500', 'block', 'mt-2')
     }
 
     div.classList.add('h-full', 'mx-5', 'border', 'border-zinc-300', 'rounded-xl', 'flex', 'flex-col', 'shadow-xl', 'hover:shadow-2xl', 'transition-shadow', 'overflow-hidden', 'bg-white', 'dark:bg-slate-800', 'dark:border-slate-700')
-    
+
     const contentDiv = document.createElement('div')
     contentDiv.classList.add('p-4')
     contentDiv.append(categorySpan)
@@ -189,10 +272,40 @@ const renderBlogs = (blogs) => {
 
     a.classList.add('w-full', 'h-full', 'cursor-pointer')
     a.setAttribute('href', `blog-detail.html?id=${blog._id || blog.id}`)
-    
+
     a.append(div)
     blogCarts.append(a)
   })
+}
+
+function setupAuthProtection() {
+  const writeABlogLink = document.querySelector('a[href="WritenewBlog.html"]')
+
+  if (writeABlogLink) {
+    writeABlogLink.addEventListener('click', (e) => {
+      const token = localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken")
+
+      if (!token) {
+        e.preventDefault()
+        alert("Please log in to write a blog")
+        window.location.href = "signin.html"
+      }
+    })
+  }
+
+  const myBlogsLink = document.querySelector('a[href*="myblogs"], a[href*="MyBlogs"]')
+
+  if (myBlogsLink) {
+    myBlogsLink.addEventListener('click', (e) => {
+      const token = localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken")
+
+      if (!token) {
+        e.preventDefault()
+        alert("Please log in to view your blogs")
+        window.location.href = "signin.html"
+      }
+    })
+  }
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -206,6 +319,8 @@ window.addEventListener("DOMContentLoaded", () => {
     body.classList.remove("bg-white", "text-black")
     body.classList.add("bg-slate-900", "text-white")
   }
+
+  setupAuthProtection()
 
   getCategories()
   getAllBlogs()

@@ -22,10 +22,19 @@ const signInRequest = async () => {
     console.log("Login passed:", data)
 
     const token = data.token || data.accessToken || data.access_token || data.data?.token
+    const refreshToken = data.refreshToken || data.refresh_token || data.data?.refreshToken
 
     if (token) {
+
       localStorage.setItem("accessToken", token)
-      console.log("Token saved to localStorage:", token)
+      sessionStorage.setItem("accessToken", token)
+      console.log("Access token saved to localStorage and sessionStorage:", token)
+
+      if (refreshToken) {
+        localStorage.setItem("refreshToken", refreshToken)
+        sessionStorage.setItem("refreshToken", refreshToken)
+        console.log("Refresh token saved to localStorage and sessionStorage:", refreshToken)
+      }
       
       alert("Login successful!")
       window.location.href = "http://127.0.0.1:5500/index.html"
