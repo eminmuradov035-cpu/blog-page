@@ -1,4 +1,3 @@
-// ==================== DOM ELEMENTS ====================
 const darkModeBtn = document.getElementById("darkModeBtn");
 const addTitleForBlog = document.getElementById("addTitleForBlog");
 const selectCategory = document.getElementById("selectCategory");
@@ -7,7 +6,6 @@ const addBlogBody = document.getElementById("addBlogBody");
 const submitBtn = document.getElementById("submitBtn");
 const body = document.getElementById("body");
 
-// ==================== BLOG DATA ====================
 let blogData = {
   title: "",
   category: "",
@@ -15,21 +13,17 @@ let blogData = {
   image: ""
 };
 
-// ==================== TOKEN MANAGEMENT ====================
 const getToken = () => {
   return localStorage.getItem("accessToken") || sessionStorage.getItem("accessToken");
 };
 
-// ==================== DARK MODE ====================
 const initDarkMode = () => {
   if (!darkModeBtn || !body) return;
 
-  // Saxlanılmış dark mode statusunu yoxla
   const savedMode = localStorage.getItem("darkmode") || "light";
   
   applyDarkMode(savedMode);
 
-  // Dark mode button click
   darkModeBtn.addEventListener("click", () => {
     const currentMode = localStorage.getItem("darkmode") || "light";
     const newMode = currentMode === "light" ? "dark" : "light";
@@ -40,7 +34,7 @@ const initDarkMode = () => {
     console.log("Dark mode toggled to:", newMode);
   });
 
-  console.log("✅ Dark mode initialized");
+  console.log("Dark mode initialized");
 };
 
 const applyDarkMode = (mode) => {
@@ -55,7 +49,6 @@ const applyDarkMode = (mode) => {
   }
 };
 
-// ==================== CATEGORIES ====================
 const getCategories = async () => {
   try {
     console.log("Loading categories...");
@@ -98,13 +91,12 @@ const populateCategorySelect = (categories) => {
       selectCategory.appendChild(option);
     });
 
-    console.log(`✅ ${categories.length} categories loaded`);
+    console.log(`${categories.length} categories loaded`);
   } else {
     console.warn("No categories found");
   }
 };
 
-// ==================== GET ALL BLOGS ====================
 const getAllBlogs = async () => {
   try {
     console.log("Fetching all blogs...");
@@ -123,15 +115,11 @@ const getAllBlogs = async () => {
     const blogs = await res.json();
     console.log("All blogs:", blogs);
 
-    // Blogları səhifədə göstərmək üçün funksiya
-    // displayBlogs(blogs);
-
   } catch (error) {
     console.error("Error fetching blogs:", error);
   }
 };
 
-// ==================== SUBMIT BLOG ====================
 const submitRequest = async () => {
   const token = getToken();
 
@@ -141,7 +129,6 @@ const submitRequest = async () => {
     return;
   }
 
-  // Validasiya
   if (!blogData.title || !blogData.category || !blogData.description) {
     alert("Please fill in all required fields");
     return;
@@ -175,7 +162,7 @@ const submitRequest = async () => {
     }
 
     const data = await res.json();
-    console.log("✅ Blog created:", data);
+    console.log("Blog created:", data);
     alert("Blog shared successfully!");
 
     resetForm();
@@ -186,7 +173,6 @@ const submitRequest = async () => {
   }
 };
 
-// ==================== RESET FORM ====================
 const resetForm = () => {
   blogData = { 
     title: "", 
@@ -200,13 +186,11 @@ const resetForm = () => {
   if (addBlogBody) addBlogBody.value = "";
   if (addThumbnailimgage) addThumbnailimgage.value = "";
   
-  console.log("✅ Form reset");
+  console.log("Form reset");
 };
 
-// ==================== EVENT LISTENERS ====================
 const initializeEventListeners = () => {
-  
-  // Title input
+
   if (addTitleForBlog) {
     addTitleForBlog.addEventListener("input", (e) => {
       blogData.title = e.target.value;
@@ -214,7 +198,6 @@ const initializeEventListeners = () => {
     });
   }
 
-  // Category select
   if (selectCategory) {
     selectCategory.addEventListener("change", (e) => {
       blogData.category = e.target.value;
@@ -222,7 +205,6 @@ const initializeEventListeners = () => {
     });
   }
 
-  // Description/Content textarea
   if (addBlogBody) {
     addBlogBody.addEventListener("input", (e) => {
       blogData.description = e.target.value;
@@ -230,14 +212,12 @@ const initializeEventListeners = () => {
     });
   }
 
-  // Image/Thumbnail input
   if (addThumbnailimgage) {
     addThumbnailimgage.addEventListener("input", (e) => {
       blogData.image = e.target.value;
     });
   }
 
-  // Submit button
   if (submitBtn) {
     submitBtn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -245,20 +225,17 @@ const initializeEventListeners = () => {
       submitRequest();
     });
   } else {
-    console.error("❌ submitBtn element not found!");
+    console.error("submitBtn element not found!");
   }
 
-  console.log("✅ Event listeners initialized");
+  console.log("Event listeners initialized");
 };
 
-// ==================== INITIALIZATION ====================
 const init = () => {
-  console.log("🚀 Initializing write blog page...");
+  console.log("Initializing write blog page...");
 
-  // Dark mode qur
   initDarkMode();
-  
-  // Token yoxla
+
   const token = getToken();
   if (!token) {
     alert("Please log in first");
@@ -266,19 +243,13 @@ const init = () => {
     return;
   }
 
-  // Event listeners qur
   initializeEventListeners();
-  
-  // Kateqoriyaları yüklə
+
   getCategories();
 
-  // Bütün blogları yüklə (əgər lazımdırsa)
-  // getAllBlogs();
-  
-  console.log("✅ Page initialized successfully");
+  console.log("Page initialized successfully");
 };
 
-// ==================== START APPLICATION ====================
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
 } else {
